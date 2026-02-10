@@ -1,9 +1,11 @@
 import { NextRequest } from 'next/server'
+import { timingSafeEqual } from 'crypto'
 import { ApiError } from '@/lib/api-utils'
 
 /**
  * Authenticate an admin request.
  * Checks the Authorization header against the ADMIN_TOKEN env var.
+ * Uses constant-time comparison to prevent timing attacks.
  */
 export function authenticateAdmin(request: NextRequest): void {
   const adminToken = process.env.ADMIN_TOKEN
@@ -17,7 +19,9 @@ export function authenticateAdmin(request: NextRequest): void {
   }
 
   const token = authHeader.slice(7)
-  if (token !== adminToken) {
+  const tokenBuf = Buffer.from(token)
+  const adminBuf = Buffer.from(adminToken)
+  if (tokenBuf.length !== adminBuf.length || !timingSafeEqual(tokenBuf, adminBuf)) {
     throw new ApiError('Unauthorized', 401, 'unauthorized')
   }
 }

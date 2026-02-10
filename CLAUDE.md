@@ -16,22 +16,25 @@ src/
       [slug]/
         vote/             # Web-based voting (auth via signed code)
     api/
-      check/              # Check slug availability
-      claim/              # Claim username
-      post/[slug]/        # Post update
-      delete/[slug]/      # Delete last post
-      profile/[slug]/     # Update profile
+      check/              # Check slug availability (30/min per IP)
+      claim/              # Step 1: Send verification code (5/hr per IP, 3/hr per email)
+        verify/           # Step 2: Verify code + create feed (10/hr per IP)
+      post/[slug]/        # Post update (50/day + 60s cooldown per feed)
+      delete/[slug]/      # Delete last post (10/hr per feed)
+      profile/[slug]/     # Update profile (10/hr per feed)
       feed/[slug]/        # Get user feed
       global/             # Global feed
       stats/              # Platform stats
       active/             # Most active users
       discover/           # Random feeds
       health/             # Health check
-      recover/            # Email recovery
-      notify/             # Shell notification check
-      skills/manifest/    # Skill manifest (version + files + announcements)
-      events/[slug]/      # Public event endpoints (join, leaderboard, vote)
-      admin/              # Admin-only endpoints (events, announcements)
+      recover/            # Email recovery (5/hr per IP, 3/hr per email)
+        verify/           # Verify recovery code (10/hr per IP, 5/email per 15min)
+      notify/             # Shell notification check (not started)
+      skills/manifest/    # Skill manifest (version + announcements)
+      events/[slug]/      # Public event endpoints (not started)
+      admin/
+        feeds/[slug]/     # Ban/unban feeds
     skill.md/             # Serve /cast SKILL.md content
     i/                    # Install script endpoint
   components/             # React components (flat — no nested folders)
@@ -43,8 +46,9 @@ src/
     admin-auth.ts         # Admin token verification
     utils.ts              # Token gen, slug validation, sanitization, colors
     api-utils.ts          # ApiError, rate limiting (Upstash + fallback), JSON parsing
-    email.ts              # Resend integration
+    email.ts              # Resend integration (recovery + verification codes)
     skill-content.ts      # /cast SKILL.md content (string export)
+  middleware.ts           # Global IP throttle (200 req/min per IP via Upstash)
 docs/
   plans/                  # Plan files
   sessions/               # Session saves
@@ -85,18 +89,21 @@ docs/
 
 | Table | Purpose |
 |-------|---------|
-| `feeds` | User accounts — slug, token_hash, profile fields |
+| `feeds` | User accounts — slug, token_hash, email (required), status (active/banned), profile fields |
 | `updates` | Posts — feed_id, project_name, content, optional event_id |
 | `events` | Hackathons — slug, name, category, status, dates, prizes |
 | `event_participants` | Who joined which event — event_id, feed_id, project info |
 | `votes` | Community voting — event_id, voter_feed_id, target_feed_id |
 | `announcements` | Push messages — message, priority, event_id, starts_at, expires_at |
 
-**Relationships:**
+**Relationships** (all defined via Drizzle `relations()` — bidirectional):
 - feeds → updates (one-to-many)
 - feeds → event_participants (one-to-many)
+- feeds → votes (one-to-many, named: `votesGiven` + `votesReceived`)
 - events → event_participants, updates, votes, announcements (one-to-many)
 - votes: unique per (event_id, voter_feed_id, target_feed_id)
+
+DB connection uses lazy Proxy pattern — build passes without `DATABASE_URL`.
 
 ## Patterns
 
@@ -212,8 +219,14 @@ export async function GET(
 
 Two auth levels:
 
-1. **Feed auth** (`authenticateRequest`) — Bearer token verified against feed's bcrypt hash. Used for posting, deleting, profile updates.
-2. **Admin auth** (`authenticateAdmin`) — Bearer token compared to `ADMIN_TOKEN` env var. Used for event/announcement management.
+1. **Feed auth** (`authenticateRequest`) — Bearer token verified against feed's bcrypt hash. Returns `{ feedId, lastPostAt }`. Checks `feed.status` — banned feeds get 403. Used for posting, deleting, profile updates.
+2. **Admin auth** (`authenticateAdmin`) — Bearer token compared to `ADMIN_TOKEN` env var using `timingSafeEqual` (constant-time). Used for ban/unban, event/announcement management.
+
+**Claim flow (two-step with email verification):**
+1. `POST /api/claim` — sends 6-digit code to email (stored in Redis, 15min TTL)
+2. `POST /api/claim/verify` — validates code, creates feed with verified email
+- Email is required. Max 3 feeds per email address.
+- Failed verification attempts tracked (max 5 before code invalidated).
 
 No web-based auth. The CLI handles token storage in `~/.config/slashcast.json`.
 
@@ -221,10 +234,17 @@ No web-based auth. The CLI handles token storage in `~/.config/slashcast.json`.
 
 | Endpoint | Limit | Window |
 |----------|-------|--------|
-| POST `/api/claim` | 5 | 1 hour per IP |
-| POST `/api/check` | 30 | 1 minute per IP |
-| POST `/api/post/[slug]` | 50 | 1 day per feed |
-| POST `/api/recover` | 5/IP, 3/email | 1 hour |
+| POST `/api/check` | 30 | 1 min per IP |
+| POST `/api/claim` | 5/IP + 3/email | 1 hr |
+| POST `/api/claim/verify` | 10 | 1 hr per IP |
+| POST `/api/post/[slug]` | 50/day + 60s cooldown | per feed |
+| PATCH `/api/profile/[slug]` | 10 | 1 hr per feed |
+| DELETE `/api/delete/[slug]` | 10 | 1 hr per feed |
+| POST `/api/recover` | 5/IP + 3/email | 1 hr |
+| POST `/api/recover/verify` | 10/IP + 5/email | 1 hr / 15 min |
+| POST `/api/claim` | 50 | 1 hr platform-wide (global) |
+| All `/api/*` | 200 | 1 min per IP (middleware) |
+| Max feeds per email | 3 | lifetime |
 
 ## Environment Variables
 

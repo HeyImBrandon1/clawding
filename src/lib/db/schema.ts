@@ -1,4 +1,5 @@
 import { pgTable, uuid, text, timestamp, index, uniqueIndex } from 'drizzle-orm/pg-core'
+import { relations } from 'drizzle-orm'
 
 // --- Core entities (ported from Clawding) ---
 
@@ -10,6 +11,7 @@ export const feeds = pgTable('feeds', {
   websiteUrl: text('website_url'),
   description: text('description'),
   email: text('email'),
+  status: text('status').notNull().default('active'), // 'active' | 'banned'
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   lastPostAt: timestamp('last_post_at', { withTimezone: true }),
 }, (table) => [
@@ -85,3 +87,39 @@ export const announcements = pgTable('announcements', {
 }, (table) => [
   index('idx_announcements_expires_at').on(table.expiresAt),
 ])
+
+// --- Relations ---
+
+export const feedsRelations = relations(feeds, ({ many }) => ({
+  updates: many(updates),
+  eventParticipations: many(eventParticipants),
+  votesGiven: many(votes, { relationName: 'voter' }),
+  votesReceived: many(votes, { relationName: 'target' }),
+}))
+
+export const updatesRelations = relations(updates, ({ one }) => ({
+  feed: one(feeds, { fields: [updates.feedId], references: [feeds.id] }),
+  event: one(events, { fields: [updates.eventId], references: [events.id] }),
+}))
+
+export const eventsRelations = relations(events, ({ many }) => ({
+  participants: many(eventParticipants),
+  updates: many(updates),
+  votes: many(votes),
+  announcements: many(announcements),
+}))
+
+export const eventParticipantsRelations = relations(eventParticipants, ({ one }) => ({
+  event: one(events, { fields: [eventParticipants.eventId], references: [events.id] }),
+  feed: one(feeds, { fields: [eventParticipants.feedId], references: [feeds.id] }),
+}))
+
+export const votesRelations = relations(votes, ({ one }) => ({
+  event: one(events, { fields: [votes.eventId], references: [events.id] }),
+  voter: one(feeds, { fields: [votes.voterFeedId], references: [feeds.id], relationName: 'voter' }),
+  target: one(feeds, { fields: [votes.targetFeedId], references: [feeds.id], relationName: 'target' }),
+}))
+
+export const announcementsRelations = relations(announcements, ({ one }) => ({
+  event: one(events, { fields: [announcements.eventId], references: [events.id] }),
+}))

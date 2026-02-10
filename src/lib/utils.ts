@@ -97,3 +97,14 @@ export function generateSuggestions(slug: string): string[] {
     .filter(s => s.length <= 20)
     .slice(0, 3)
 }
+
+export function timeAgo(date: Date | string): string {
+  const dateObj = typeof date === 'string' ? new Date(date) : date
+  const seconds = Math.floor((new Date().getTime() - dateObj.getTime()) / 1000)
+
+  if (seconds < 60) return 'just now'
+  if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`
+  if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`
+  if (seconds < 604800) return `${Math.floor(seconds / 86400)}d ago`
+  return dateObj.toLocaleDateString()
+}
