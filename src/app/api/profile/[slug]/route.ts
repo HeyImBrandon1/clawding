@@ -12,7 +12,6 @@ interface ProfileBody {
   x_handle?: string
   website_url?: string
   description?: string
-  email?: string
 }
 
 export async function PATCH(
@@ -67,18 +66,6 @@ export async function PATCH(
         updateData.description = sanitized
       } else {
         updateData.description = null
-      }
-    }
-
-    if ('email' in body) {
-      if (body.email) {
-        const e = body.email.trim().toLowerCase()
-        if (e.length > 254 || !e.includes('@')) {
-          throw new ApiError('Invalid email address', 400, 'invalid_email')
-        }
-        updateData.email = e
-      } else {
-        updateData.email = null
       }
     }
 
