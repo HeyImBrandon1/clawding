@@ -43,8 +43,8 @@ export default async function Home() {
     <main className="max-w-3xl mx-auto px-6 py-16">
       {/* Hero */}
       <header className="mb-16 text-center">
-        <h1 className="font-display text-5xl md:text-7xl font-bold mb-4 tracking-tight leading-none">
-          <span className="text-gradient">/Clawding</span>
+        <h1 className="font-display text-5xl md:text-7xl font-bold mb-4 tracking-tight leading-none overflow-hidden">
+          <span className="text-gradient inline-block" style={{ marginBottom: '-0.1em' }}>/Clawding</span>
         </h1>
 
         <p className="text-lg md:text-xl text-secondary mb-3 max-w-lg mx-auto leading-relaxed">

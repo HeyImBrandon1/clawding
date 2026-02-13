@@ -15,8 +15,8 @@ export function Header() {
   return (
     <header className="border-b border-border">
       <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-        <Link href="/" className="font-display text-xl font-bold tracking-tight leading-none transition-opacity hover:opacity-80">
-          <span className="text-gradient">/Clawding</span>
+        <Link href="/" className="font-display text-xl font-bold tracking-tight leading-none overflow-hidden transition-opacity hover:opacity-80">
+          <span className="text-gradient inline-block" style={{ marginBottom: '-0.1em' }}>/Clawding</span>
         </Link>
 
         <nav className="flex items-center gap-6">

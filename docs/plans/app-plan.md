@@ -16,11 +16,11 @@ Created: 2026-02-10
 - **Command:** `/cast` (core), `/cast:events` (sub-skills)
 - **Logo:** `/` mark — minimal, works at any size. The slash IS the brand.
 - **Theme:** Dark background, white text, accent colors (carried from Clawding's coral + cyan palette). Developers code in dark mode.
-- **Domain:** TBD (slashcast.dev / slashcast.app / slashcast.io)
-- **GitHub org:** TBD (github.com/slashcast)
-- **Install:** `curl -sL {domain}/i | bash`
-- **Config:** `~/.config/slashcast.json`
-- **Skill path:** `~/.claude/skills/slashcast/SKILL.md`
+- **Domain:** clawding.app
+- **GitHub:** github.com/HeyImBrandon1/clawding
+- **Install:** `curl -sL clawding.app/i | bash`
+- **Config:** `~/.config/clawding.json`
+- **Skill path:** `~/.claude/skills/clawding/SKILL.md`
 
 ## Features
 
@@ -76,7 +76,7 @@ Created: 2026-02-10
 ### New Entities
 
 **Event** (`events`)
-- Key fields: slug, name, description, category (slashcast/skills/general), status (announced/active/ended/archived), starts_at, ends_at, prizes, rules, voting_ends_at
+- Key fields: slug, name, description, category (clawding/skills/general), status (announced/active/ended/archived), starts_at, ends_at, prizes, rules, voting_ends_at
 - Has many: event_participants, updates (via event_id), votes, announcements
 
 **Event Participant** (`event_participants`)
@@ -106,9 +106,9 @@ feeds → votes as target (one-to-many)
 ## User Flows
 
 ### Coder: Install and First Post
-1. Runs `curl -sL slashcast.dev/i | bash` → skill installed + shell hook opt-in
+1. Runs `curl -sL clawding.app/i | bash` → skill installed + shell hook opt-in
 2. Runs `/cast` → welcome flow, claims username, picks a slug
-3. Posts first update → "Posted! View at slashcast.dev/username"
+3. Posts first update → "Posted! View at clawding.app/username"
 4. Opens new terminal later → shell hook silently checks for announcements
 
 ### Coder: Discover and Join Event
@@ -116,7 +116,7 @@ feeds → votes as target (one-to-many)
 2. Runs `/cast:events` → sees active/upcoming events with descriptions
 3. Runs `/cast:events join winter-hackathon` → picks a project name
 4. Posts updates with `/cast` as normal — auto-tagged to the event
-5. Views leaderboard at slashcast.dev/events/winter-hackathon
+5. Views leaderboard at clawding.app/events/winter-hackathon
 
 ### Coder: Vote on Submissions
 1. Event ends → notification "Winter Hackathon voting is open!"
@@ -173,7 +173,7 @@ feeds → votes as target (one-to-many)
 - **Past events archive page** [S]
 - **Event stats** (participants, posts, activity) [S]
 - **Multi-IDE installer** — detect Codex/Copilot/Cursor/Cline, install skills [S]
-- **Clawding migration path** — redirect clawding.app to slashcast, migrate existing users [M]
+- **Clawding migration path** — migrate existing users to new schema if needed [M]
 
 ## Architecture Notes
 - **App type:** full-stack
@@ -212,5 +212,5 @@ Code to replace:
 - [x] Domain: secured
 - [x] GitHub org: github.com/Clawding (Free plan, open source)
 - [ ] Accent color palette (keep coral+cyan from Clawding or new colors?)
-- [ ] Event categories exact naming (slashcast/skills/general vs other)
+- [ ] Event categories exact naming (clawding/skills/general vs other)
 - [ ] Clawding user migration strategy
