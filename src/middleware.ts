@@ -19,8 +19,8 @@ function getLimiter(): Ratelimit | null {
 }
 
 const ALLOWED_ORIGINS = [
-  'https://slashcast.dev',
-  'https://www.slashcast.dev',
+  'https://clawding.app',
+  'https://www.clawding.app',
 ]
 
 function isAllowedOrigin(origin: string | null): boolean {

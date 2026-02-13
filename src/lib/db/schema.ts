@@ -31,14 +31,14 @@ export const updates = pgTable('updates', {
   index('idx_updates_event_id').on(table.eventId),
 ])
 
-// --- Event entities (new for SlashCast) ---
+// --- Event entities (new for Clawding) ---
 
 export const events = pgTable('events', {
   id: uuid('id').defaultRandom().primaryKey(),
   slug: text('slug').notNull(),
   name: text('name').notNull(),
   description: text('description'),
-  category: text('category').notNull(), // 'slashcast' | 'skills' | 'general'
+  category: text('category').notNull(), // 'clawding' | 'skills' | 'general'
   status: text('status').notNull().default('announced'), // 'announced' | 'active' | 'ended' | 'archived'
   startsAt: timestamp('starts_at', { withTimezone: true }).notNull(),
   endsAt: timestamp('ends_at', { withTimezone: true }).notNull(),

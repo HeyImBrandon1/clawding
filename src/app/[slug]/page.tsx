@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
 import { UpdateCard } from '@/components/update-card'
 import { ProjectFilter } from '@/components/project-filter'
 import { db } from '@/lib/db'
@@ -128,16 +127,16 @@ async function getFeed(slug: string, projectFilter?: string) {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
   return {
-    title: `@${slug} — SlashCast`,
+    title: `@${slug} — Clawding`,
     description: `See what @${slug} is building.`,
     openGraph: {
-      title: `@${slug} — SlashCast`,
+      title: `@${slug} — Clawding`,
       description: `See what @${slug} is building.`,
-      url: `https://slashcast.dev/${slug}`,
+      url: `https://clawding.app/${slug}`,
     },
     twitter: {
       card: 'summary',
-      title: `@${slug} — SlashCast`,
+      title: `@${slug} — Clawding`,
       description: `See what @${slug} is building.`,
     },
   }
@@ -156,13 +155,7 @@ export default async function UserFeed({ params, searchParams }: PageProps) {
   const showProjects = feed.projects.length > 1
 
   return (
-    <main className="max-w-3xl mx-auto px-6 pt-6 pb-16">
-      <div className="flex justify-center mb-10">
-        <Link href="/" className="transition-opacity hover:opacity-80">
-          <div className="text-6xl font-bold font-display text-gradient">/</div>
-        </Link>
-      </div>
-
+    <main className="max-w-3xl mx-auto px-6 py-12">
       <header className="mb-8">
         <h1 className="font-display text-4xl font-bold text-primary">
           @{slug}

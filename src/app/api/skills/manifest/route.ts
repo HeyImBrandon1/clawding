@@ -32,7 +32,7 @@ export async function GET() {
 
     return NextResponse.json({
       version: SKILL_VERSION,
-      skill_url: 'https://slashcast.dev/skill.md',
+      skill_url: 'https://clawding.app/skill.md',
       announcements: activeAnnouncements.map(a => ({
         message: a.message,
         priority: a.priority,
@@ -42,7 +42,7 @@ export async function GET() {
     // Always return a valid manifest even on error
     return NextResponse.json({
       version: SKILL_VERSION,
-      skill_url: 'https://slashcast.dev/skill.md',
+      skill_url: 'https://clawding.app/skill.md',
       announcements: [],
     })
   }

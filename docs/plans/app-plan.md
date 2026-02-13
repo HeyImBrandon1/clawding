@@ -1,9 +1,9 @@
-# App Plan: SlashCast
+# App Plan: Clawding
 
 Created: 2026-02-10
 
 ## Vision
-- **Name:** SlashCast
+- **Name:** Clawding
 - **Tagline:** Broadcast What You Build
 - **Type:** full-stack
 - **Description:** A terminal-native coding community platform — broadcast what you're building, join live coding events, compete in hackathons, all from your CLI with `/cast`
@@ -12,7 +12,7 @@ Created: 2026-02-10
 - **Origin:** Evolved from Clawding (clawding.app) — repurposing the codebase with new brand, expanded features, cross-platform identity
 
 ## Brand
-- **Name:** SlashCast
+- **Name:** Clawding
 - **Command:** `/cast` (core), `/cast:events` (sub-skills)
 - **Logo:** `/` mark — minimal, works at any size. The slash IS the brand.
 - **Theme:** Dark background, white text, accent colors (carried from Clawding's coral + cyan palette). Developers code in dark mode.
@@ -136,14 +136,14 @@ feeds → votes as target (one-to-many)
 ### Coder: Self-Updating Skill
 1. Runs `/cast` → checks manifest (if >1 hour since last check)
 2. New event skill available → downloads to skills directory
-3. Shows: "SlashCast updated! New: Winter Hackathon — run /cast:events for details"
+3. Shows: "Clawding updated! New: Winter Hackathon — run /cast:events for details"
 4. Event ends → next check removes the event skill file
 5. Core /cast posting flow is never interrupted
 
 ## Build Order
 
 ### Phase 1: Foundation (new project setup)
-- **Scaffold SlashCast project** — Next.js 16, Tailwind v4, Drizzle, dark theme. Port good code from Clawding. [L]
+- **Scaffold Clawding project** — Next.js 16, Tailwind v4, Drizzle, dark theme. Port good code from Clawding. [L]
 - **Core schema** — feeds + updates tables (ported) + 4 new tables (events, event_participants, votes, announcements) + event_id on updates [M]
 - **Core API** — port all existing endpoints (check, claim, post, delete, profile, feed, global, stats, active, discover, health, recover) [L]
 - **Core pages** — homepage, user feed, guide, global feed. New brand, `/` logo, dark theme with accent colors [L]
@@ -199,18 +199,18 @@ Code to repurpose (port, don't copy blindly — refactor as needed):
 - Skill content structure (rewrite for /cast, add manifest + event commands)
 
 Code to replace:
-- All branding (Clawding → SlashCast, crab mascot → / logo)
+- All branding (Clawding → Clawding, crab mascot → / logo)
 - Color palette (keep dark theme, update accent colors if needed)
 - Install script (new domain, shell hook, manifest-aware)
 - Homepage hero + messaging
 
 ## Open Decisions
-- [x] Name: SlashCast
+- [x] Name: Clawding
 - [x] Command: /cast
 - [x] Logo: / mark (minimal)
 - [x] Theme: Dark with accent colors
 - [x] Domain: secured
-- [x] GitHub org: github.com/Slashcast (Free plan, open source)
+- [x] GitHub org: github.com/Clawding (Free plan, open source)
 - [ ] Accent color palette (keep coral+cyan from Clawding or new colors?)
 - [ ] Event categories exact naming (slashcast/skills/general vs other)
 - [ ] Clawding user migration strategy

@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 export function InstallCommand() {
   const [copied, setCopied] = useState(false)
-  const command = 'curl -sL slashcast.dev/i | bash'
+  const command = 'curl -sL clawding.app/i | bash'
 
   const copy = () => {
     navigator.clipboard.writeText(command).catch(() => {

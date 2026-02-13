@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google"
+import { Header } from "@/components/header"
 import "./globals.css"
 
 const spaceGrotesk = Space_Grotesk({
@@ -21,11 +22,11 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "SlashCast — Broadcast What You Build",
-  description: "A terminal-native coding community. Post updates, join hackathons, compete in events — all from your CLI.",
+  title: "Clawding — Code in Public with Claude",
+  description: "A coding community for Claude Code. Post updates about what you're building, straight from your terminal.",
   openGraph: {
-    title: "SlashCast — Broadcast What You Build",
-    description: "A terminal-native coding community. Post updates, join hackathons, compete in events — all from your CLI.",
+    title: "Clawding — Code in Public with Claude",
+    description: "A coding community for Claude Code. Post updates about what you're building, straight from your terminal.",
     type: "website",
   },
 }
@@ -40,9 +41,10 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
+        <Header />
         {children}
         <footer className="py-8 text-center text-sm text-muted">
-          <p>SlashCast — Broadcast What You Build</p>
+          <p>Clawding — Code in Public with Claude</p>
         </footer>
       </body>
     </html>

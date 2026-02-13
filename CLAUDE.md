@@ -1,4 +1,4 @@
-# SlashCast
+# Clawding
 
 Terminal-native coding community platform. Broadcast what you build, join events, compete in hackathons — all from `/cast`.
 
@@ -62,7 +62,7 @@ docs/
 2. **Token-based auth.** No passwords, no sessions, no NextAuth. Users get a token via `/cast`, it's bcrypt hashed.
 3. **Admin via API.** No admin dashboard. Events and announcements managed via API calls with `ADMIN_TOKEN`.
 4. **CLI-first.** The website displays data. The CLI (`/cast`) is the primary interaction point.
-5. **Open source.** Code is public at github.com/Slashcast. Never commit secrets.
+5. **Open source.** Code is public at github.com/Clawding. Never commit secrets.
 
 ## Tech Stack
 
@@ -228,7 +228,7 @@ Two auth levels:
 - Email is required. Max 3 feeds per email address.
 - Failed verification attempts tracked (max 5 before code invalidated).
 
-No web-based auth. The CLI handles token storage in `~/.config/slashcast.json`.
+No web-based auth. The CLI handles token storage in `~/.config/clawding.json`.
 
 ## Rate Limits
 

@@ -1,7 +1,7 @@
-# SlashCast — Project Spec
+# Clawding — Project Spec
 
 ## Overview
-SlashCast is a terminal-native coding community platform. Developers broadcast what they're building, join live coding events, compete in hackathons — all from their CLI with `/cast`.
+Clawding is a terminal-native coding community platform. Developers broadcast what they're building, join live coding events, compete in hackathons — all from their CLI with `/cast`.
 
 **Tagline:** Broadcast What You Build
 
@@ -15,7 +15,7 @@ Core platform shipped with full security hardening. All Clawding endpoints porte
 - **Rate Limiting:** Upstash Redis (with in-memory fallback)
 - **Email:** Resend (verification + recovery)
 - **Hosting:** Vercel
-- **Repo:** github.com/Slashcast (open source)
+- **Repo:** github.com/Clawding (open source)
 
 ## Database Schema
 

@@ -2,14 +2,14 @@ import { NextResponse } from 'next/server'
 import { skillContent } from '@/lib/skill-content'
 
 const installScript = `#!/bin/bash
-mkdir -p ~/.claude/skills/cast
-cat > ~/.claude/skills/cast/SKILL.md << 'SLASHCAST_EOF'
+mkdir -p ~/.claude/skills/clawding
+cat > ~/.claude/skills/clawding/SKILL.md << 'CLAWDING_EOF'
 ${skillContent}
-SLASHCAST_EOF
+CLAWDING_EOF
 echo ""
-echo "✓ SlashCast installed!"
+echo "✓ Clawding installed!"
 echo ""
-echo "  Type /cast now to claim your username and start broadcasting."
+echo "  Type /clawding now to claim your username and start posting."
 echo ""
 `
 

@@ -18,17 +18,17 @@ export async function sendVerificationCode(email: string, code: string, slug: st
   }
 
   const { error } = await client.emails.send({
-    from: 'SlashCast <noreply@slashcast.dev>',
+    from: 'Clawding <noreply@clawding.app>',
     to: email,
-    subject: 'Verify your SlashCast account',
+    subject: 'Verify your Clawding account',
     text: [
-      `Your verification code for slashcast.dev/${slug} is: ${code}`,
+      `Your verification code for clawding.app/${slug} is: ${code}`,
       '',
       'This code expires in 15 minutes.',
       '',
       'If you did not request this, you can ignore this email.',
       '',
-      '— SlashCast',
+      '— Clawding',
     ].join('\n'),
   })
 
@@ -48,17 +48,17 @@ export async function sendRecoveryCode(email: string, code: string, slug: string
   }
 
   const { error } = await client.emails.send({
-    from: 'SlashCast <noreply@slashcast.dev>',
+    from: 'Clawding <noreply@clawding.app>',
     to: email,
-    subject: 'Your SlashCast recovery code',
+    subject: 'Your Clawding recovery code',
     text: [
-      `Your recovery code for slashcast.dev/${slug} is: ${code}`,
+      `Your recovery code for clawding.app/${slug} is: ${code}`,
       '',
       'This code expires in 15 minutes.',
       '',
       'If you did not request this, you can ignore this email.',
       '',
-      '— SlashCast',
+      '— Clawding',
     ].join('\n'),
   })
 
