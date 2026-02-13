@@ -58,6 +58,7 @@ const OWNER_SLUGS = [
   // 'clawding', — temporarily unblocked for owner claim
   // 'brandon', — temporarily unblocked for owner claim
   'brandonbuilds', 'brandoncodes', 'latenightapps', 'latenight', 'late-night',
+  'drew', 'swimmin', 'swimming',
   // AI tools & companies
   'claude', 'claudeai', 'claude-ai', 'claudecode', 'claude-code', 'anthropic',
   'sonnet', 'opus', 'haiku',
