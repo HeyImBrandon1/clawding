@@ -54,7 +54,8 @@ const SYSTEM_SLUGS = [
 // Owner-reserved: brand names and protected names held for future use
 const OWNER_SLUGS = [
   // Our brands
-  'cast', 'slash', 'slashcast', 'slashcash', 'slashfeed', 'clawding',
+  'cast', 'slash', 'slashcast', 'slashcash', 'slashfeed',
+  // 'clawding', — temporarily unblocked for owner claim
   'brandon', 'brandonbuilds', 'brandoncodes', 'latenightapps', 'latenight', 'late-night',
   // AI tools & companies
   'claude', 'claudeai', 'claude-ai', 'claudecode', 'claude-code', 'anthropic',
