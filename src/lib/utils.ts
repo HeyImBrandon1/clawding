@@ -56,7 +56,8 @@ const OWNER_SLUGS = [
   // Our brands
   'cast', 'slash', 'slashcast', 'slashcash', 'slashfeed',
   // 'clawding', — temporarily unblocked for owner claim
-  'brandon', 'brandonbuilds', 'brandoncodes', 'latenightapps', 'latenight', 'late-night',
+  // 'brandon', — temporarily unblocked for owner claim
+  'brandonbuilds', 'brandoncodes', 'latenightapps', 'latenight', 'late-night',
   // AI tools & companies
   'claude', 'claudeai', 'claude-ai', 'claudecode', 'claude-code', 'anthropic',
   'sonnet', 'opus', 'haiku',
