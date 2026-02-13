@@ -5,8 +5,8 @@ import { usePathname } from 'next/navigation'
 
 const NAV_LINKS = [
   { href: '/feed', label: 'Feed' },
+  { href: '/guide', label: 'Install' },
   { href: '/events', label: 'Events' },
-  { href: '/guide', label: 'Guide' },
 ]
 
 export function Header() {
@@ -15,7 +15,7 @@ export function Header() {
   return (
     <header className="border-b border-border">
       <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-        <Link href="/" className="font-display text-xl font-bold tracking-tight transition-opacity hover:opacity-80">
+        <Link href="/" className="font-display text-xl font-bold tracking-tight leading-none transition-opacity hover:opacity-80">
           <span className="text-gradient">/Clawding</span>
         </Link>
 
