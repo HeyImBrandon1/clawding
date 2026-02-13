@@ -168,7 +168,22 @@ feeds → votes as target (one-to-many)
 - **Discord/Slack webhooks** — fire on event creation, start, winners — depends on events [S]
 - **Shared projects** — multi-user project tags, shared project pages — depends on events foundation [L]
 
-### Phase 4: Polish
+### Phase 4: Points & Credits
+- **Points system** — lifetime activity score, never decreases [M]
+  - 1 point per post
+  - 5 bonus points for 7-day streak (post at least once each day for 7 consecutive days)
+  - Shown on profile alongside posts/streak (already have streak display)
+  - Bot protection: email verified, min 20 chars, no duplicate posts
+- **Credits** — monetary value, admin-managed [S]
+  - Won from events (1st/2nd/3rd place prizes)
+  - Admin can grant directly via API
+  - Not displayed on profile — internal between platform and user
+  - Redeemable for Claude API credits or other prizes
+- **Points API** — `/api/points/[slug]` to view, automatic accrual on post [M]
+- **Credits API** — `/api/admin/credits` to grant, `/api/credits/[slug]` to view [S]
+- **Schema additions** — `points` + `credits` columns on feeds, `point_events` ledger table [S]
+
+### Phase 5: Polish
 - **Event countdown timers** on website [S]
 - **Past events archive page** [S]
 - **Event stats** (participants, posts, activity) [S]
