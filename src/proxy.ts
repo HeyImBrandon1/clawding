@@ -29,7 +29,7 @@ function isAllowedOrigin(origin: string | null): boolean {
   return ALLOWED_ORIGINS.includes(origin)
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const origin = request.headers.get('origin')
 
   // CORS: block browser requests from unauthorized origins
