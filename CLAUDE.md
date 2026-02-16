@@ -1,8 +1,8 @@
 # Clawding
 
-Terminal-native coding community platform. Broadcast what you build, join events, compete in hackathons — all from `/cast`.
+Code in public with Claude Code. Post updates about what you're building, straight from your terminal.
 
-**Plan:** See `docs/plans/app-plan.md` for feature roadmap, data model, and build order.
+**Roadmap:** See `README.md` for build phases and what's next.
 
 ## Architecture
 
@@ -11,7 +11,7 @@ src/
   app/                    # Next.js App Router
     [slug]/               # User feed pages
     feed/                 # Global feed
-    guide/                # Guide/docs
+    install/              # Install guide
     events/               # Event list + detail + voting
       [slug]/
         vote/             # Web-based voting (auth via signed code)
@@ -35,7 +35,7 @@ src/
       events/[slug]/      # Public event endpoints (not started)
       admin/
         feeds/[slug]/     # Ban/unban feeds
-    skill.md/             # Serve /cast SKILL.md content
+    skill.md/             # Serve /clawding SKILL.md content
     i/                    # Install script endpoint
   components/             # React components (flat — no nested folders)
   lib/
@@ -47,22 +47,18 @@ src/
     utils.ts              # Token gen, slug validation, sanitization, colors
     api-utils.ts          # ApiError, rate limiting (Upstash + fallback), JSON parsing
     email.ts              # Resend integration (recovery + verification codes)
-    skill-content.ts      # /cast SKILL.md content (string export)
+    skill-content.ts      # /clawding SKILL.md content (string export)
   middleware.ts           # Global IP throttle (200 req/min per IP via Upstash)
-docs/
-  plans/                  # Plan files
-  sessions/               # Session saves
-  journal/                # Build journal entries
-  PROJECT_SPEC.md         # Current state of the project
+docs/                     # Public docs only (private/ is gitignored)
 ```
 
 ## Core Principles
 
 1. **Dark theme, always.** Background `#050810`, coral + cyan accents. No light mode.
-2. **Token-based auth.** No passwords, no sessions, no NextAuth. Users get a token via `/cast`, it's bcrypt hashed.
+2. **Token-based auth.** No passwords, no sessions, no NextAuth. Users get a token via `/clawding`, it's bcrypt hashed.
 3. **Admin via API.** No admin dashboard. Events and announcements managed via API calls with `ADMIN_TOKEN`.
-4. **CLI-first.** The website displays data. The CLI (`/cast`) is the primary interaction point.
-5. **Open source.** Code is public at github.com/Clawding. Never commit secrets.
+4. **CLI-first.** The website displays data. The CLI (`/clawding`) is the primary interaction point.
+5. **Open source.** Code is public at github.com/HeyImBrandon1/clawding. Never commit secrets.
 
 ## Tech Stack
 
@@ -273,13 +269,6 @@ npx drizzle-kit generate  # Generate migration files
 - Keep commits focused — one feature/fix per commit
 - Never commit `.env.local` or any secrets
 
-## Session Continuity
-
-- `docs/PROJECT_SPEC.md` — current state of the project
-- `docs/journal/` — session history
-- `docs/sessions/` — session saves for context recovery
-- `docs/plans/app-plan.md` — feature roadmap and build order
-
 ## Feature Skeleton
 
 When building a new feature, create files in this order:
@@ -297,7 +286,5 @@ Component:  components/{feature-name}-{purpose}.tsx       → client interactivi
 ## Before Writing Code
 
 1. Read this CLAUDE.md
-2. Read `docs/plans/app-plan.md` for build order and data model
-3. Check `docs/PROJECT_SPEC.md` for current state
-4. Check `docs/journal/` for recent session history
-5. Run `npm run build` to verify starting state
+2. Check `README.md` roadmap for build phases
+3. Run `npm run build` to verify starting state

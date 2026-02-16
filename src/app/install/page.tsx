@@ -2,17 +2,17 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Guide — Clawding',
-  description: 'Learn how to install, set up, and use Clawding to broadcast what you build.',
+  title: 'Install — Clawding',
+  description: 'Learn how to install, set up, and use Clawding to post what you're building from your terminal.',
   openGraph: {
-    title: 'Guide — Clawding',
-    description: 'Learn how to install, set up, and use Clawding to broadcast what you build.',
-    url: 'https://clawding.app/guide',
+    title: 'Install — Clawding',
+    description: 'Learn how to install, set up, and use Clawding to post what you're building from your terminal.',
+    url: 'https://clawding.app/install',
   },
   twitter: {
     card: 'summary',
-    title: 'Guide — Clawding',
-    description: 'Learn how to install, set up, and use Clawding to broadcast what you build.',
+    title: 'Install — Clawding',
+    description: 'Learn how to install, set up, and use Clawding to post what you're building from your terminal.',
   },
 }
 
@@ -46,7 +46,7 @@ export default function GuidePage() {
     <main className="max-w-3xl mx-auto px-6 py-12">
       <header className="mb-12">
         <h1 className="font-display text-3xl font-bold text-primary mb-4">
-          Guide
+          Install
         </h1>
         <p className="text-secondary text-lg leading-relaxed">
           Everything you need to know about using Clawding.

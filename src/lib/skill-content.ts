@@ -265,4 +265,4 @@ To clear a description: \`/clawding describe SLUG ""\` (empty string)
 - Always read the config file fresh before writing to it (never cache across operations).
 - When writing the config file, preserve all existing data — only modify the specific field being changed.
 - Never display tokens to the user.
-- The guide is at clawding.app/guide if the user needs help.`
+- The install guide is at clawding.app/install if the user needs help.`

@@ -27,7 +27,7 @@ const SYSTEM_SLUGS = [
   'terms', 'terms-of-service', 'privacy', 'privacy-policy',
   'legal', 'tos', 'dmca', 'security', 'cookies', 'cookie-policy',
   'pricing', 'plans', 'pro', 'premium', 'upgrade', 'billing',
-  'guide', 'guides', 'docs', 'documentation', 'faq', 'faqs',
+  'install', 'guide', 'guides', 'docs', 'documentation', 'faq', 'faqs',
   'blog', 'news', 'changelog', 'change-log', 'roadmap', 'road-map',
   'status', 'uptime', 'incidents',
   'event', 'events', 'hackathon', 'hackathons', 'hack',
